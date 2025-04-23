@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEAN Stack Developer Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <style>
+    :root {
+      --primary-color: #5D5CDE;
+      --primary-dark: #4a49b1;
+      --primary-light: #7e7de8;
+      --text-dark: #111827;
+      --text-light: #F9FAFB;
+      --bg-light: #FFFFFF;
+      --bg-dark: #181818;
+      --card-light: #F3F4F6;
+      --card-dark: #242424;
+    }
+
+    .dark {
+      --text-color: var(--text-light);
+      --bg-color: var(--bg-dark);
+      --card-bg: var(--card-dark);
+    }
+
+    .light {
+      --text-color: var(--text-dark);
+      --bg-color: var(--bg-light);
+      --card-bg: var(--card-light);
+    }
+    :root {
+    --bg-light: #f8f9fa;
+    --primary-opacity: rgba(93, 92, 222, 0.1);
+}
+
+.dark {
+    --bg-light: #1a1a1a;
+    --primary-opacity: rgba(109, 109, 247, 0.2);
+}
+    body {
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      transition: background-color 0.5s, color 0.5s;
+      scroll-behavior: smooth;
+    }
+
+    #particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      opacity: 0.2;
+    }
+
+    .section {
+      opacity: 0;
+    }
+
+    .skill-bar {
+      height: 8px;
+      background-color: #e6e6e6;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background-color: var(--primary-color);
+      border-radius: 4px;
+      width: 0%;
+      transition: width 1s ease;
+    }
+
+    .nav-link.active {
+      color: var(--primary-color);
+    }
+
+    .project-card {
+      border-left: 3px solid var(--primary-color);
+      background-color: var(--card-bg);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 30px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background-color: var(--primary-color);
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+    }
+
+    .form-input {
+      background-color: var(--card-bg);
+      border: 1px solid rgba(128, 128, 128, 0.2);
+      transition: border-color 0.3s;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      position: relative;
+      width: 60px;
+      height: 30px;
+      border-radius: 15px;
+      background-color: var(--card-bg);
+      transition: 0.3s;
+    }
+
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      transition: 0.3s;
+    }
+
+    .dark .theme-toggle::after {
+      transform: translateX(30px);
+    }
+
+    .color-option {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .color-option:hover {
+      transform: scale(1.1);
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: var(--bg-color);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        padding: 20px 0;
+        z-index: 999;
+      }
+
+      .nav-menu.active {
+        left: 0;
+      }
+
+      .nav-item {
+        margin: 15px 0;
+      }
+    }
+
+    /* Education Section Styles */
+    #Education {
+      padding: 4rem 0;
+      background: var(--bg-light);
+    }
+
+    #Education .heading {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    #Education .heading span {
+      color: var(--primary-color);
+    }
+
+    .education-timeline {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .timeline-card {
+      background: var(--bg-color);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 2rem;
+      margin: 2rem 0;
+      display: flex;
+      gap: 2rem;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .university-brand {
+      position: relative;
+      flex: 0 0 150px;
+    }
+
+    .uni-logo {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      filter: grayscale(100%);
+      transition: filter 0.3s ease;
+    }
+
+    .timeline-card:hover .uni-logo {
+      filter: grayscale(0);
+    }
+
+    .graduation-ribbon {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--primary-color);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(93,92,222,0.3);
+    }
+
+    .degree-details {
+      flex: 1;
+    }
+
+    .degree-details h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+    }
+
+    .specialization {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .specialization i {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+    }
+
+    .gpa-badge {
+      display: inline-block;
+      background: var(--primary-opacity);
+      color: var(--primary-color);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .achievements-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .achievements-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .achievements-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .university-brand {
+        flex: 0 0 auto;
+        margin: 0 auto;
+        width: 120px;
+      }
+
+      .specialization {
+        justify-content: center;
+      }
+
+      .graduation-ribbon {
+        right: 0;
+      }
+    }
+
+    /* Feedback Section Styles */
+    .feedback {
+      padding: 5rem 9%;
+      background: var(--card-bg);
+      position: relative;
+    }
+
+    .feedback-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .feedback-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding: 0 30px;
+    }
+
+    .feedback-title {
+      font-size: 32px;
+      color: var(--text-color);
+      letter-spacing: 1.5px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .feedback-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 80%;
+      background: var(--primary-color);
+    }
+
+    .navigation-wrapper {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-arrow {
+      width: 45px;
+      height: 45px;
+      background: var(--bg-color);
+      border: 2px solid #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-arrow:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .swiper-container {
+      position: relative;
+      padding: 0 30px;
+      background: rgba(93, 92, 222, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .feedback-card {
+      background: var(--bg-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .feedback-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .customer-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 1.5rem;
+    }
+
+    .customer-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .feedback-card h3 {
+      font-size: 18px;
+      color: var(--text-color);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .feedback-card h5 {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .rating {
+      margin: 1rem 0;
+      color: #ffd700;
+    }
+
+    .rating i {
+      font-size: 16px;
+      margin: 0 2px;
+    }
+
+    .feedback-card p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-top: 12px;
+      padding: 0 10px;
+    }
+
+    .action-btn {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      backdrop-filter: blur(2px);
+    }
+
+    .action-btn:hover {
+      background: #fff;
+      transform: scale(1.1);
+    }
+
+    .favorite-btn i {
+      color: #666;
+      transition: color 0.3s;
+    }
+
+    .favorite-btn.active i {
+      color: var(--primary-color);
+    }
+
+    .feedback-menu {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: var(--bg-color);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 3;
+    }
+
+    .feedback-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* .menu-item {
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .menu-item:hover {
+      background: var(--card-bg);
+      color: var(--primary-color);
+    }
+
+    .menu-item i {
+      width: 20px;
+      text-align: center;
+    } */
+
+    .swiper-pagination {
+      position: relative;
+      margin-top: 40px;
+    }
+
+    .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      background: #ddd;
+      opacity: 1;
+      margin: 0 8px !important;
+      transition: all 0.3s;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary-color);
+      transform: scale(1.3);
+    }
+
+    @media (max-width: 1200px) {
+      .feedback-container {
+        padding: 40px 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .feedback-header {
+        padding: 0 15px;
+      }
+
+      .feedback-title {
+        font-size: 24px;
+      }
+
+      .feedback-card {
+        padding: 15px;
+      }
+
+      .customer-img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body class="light">
+  <div id="particles-container"></div>
+  
+  <!-- Navbar -->
+  <header class="fixed w-full top-0 z-50 bg-opacity-80 backdrop-blur-md" style="background-color: var(--bg-color);">
+    <div class="container mx-auto px-6 py-3">
+      <nav class="flex items-center justify-between">
+        <div class="text-2xl font-bold" style="color: var(--primary-color);">Dev<span class="text-gray-700 dark:text-gray-300">Portfolio</span></div>
+        
+        <div class="hamburger">
+          <i class="fas fa-bars text-xl"></i>
+        </div>
+        
+        <ul class="nav-menu hidden md:flex space-x-8">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#Feedback" class="nav-link">Feedback</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        
+        <div class="flex items-center space-x-4">
+          <div class="theme-toggle"></div>
+          <div class="relative">
+            <button id="colorMenuBtn" class="flex items-center justify-center w-8 h-8 rounded-full" style="background-color: var(--primary-color);">
+              <i class="fas fa-palette text-white"></i>
+            </button>
+            <div id="colorMenu" class="absolute right-0 mt-2 p-3 rounded-lg shadow-lg hidden" style="background-color: var(--card-bg);">
+              <div class="flex space-x-2">
+                <div class="color-option" style="background-color: #5D5CDE;" data-color="#5D5CDE"></div>
+                <div class="color-option" style="background-color: #4CAF50;" data-color="#4CAF50"></div>
+                <div class="color-option" style="background-color: #F44336;" data-color="#F44336"></div>
+                <div class="color-option" style="background-color: #FF9800;" data-color="#FF9800"></div>
+                <div class="color-option" style="background-color: #00BCD4;" data-color="#00BCD4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center px-6 py-20 pt-24 section">
+    <div class="container mx-auto text-center">
+      <div class="mb-6 inline-block rounded-full p-4 opacity-80" style="background-color: var(--primary-color);">
+        <i class="fas fa-code text-white text-3xl"></i>
+      </div>
+      <h1 class="text-5xl md:text-7xl font-bold mb-4">MEAN Stack <span style="color: var(--primary-color);">Developer</span></h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto opacity-80">Creating seamless web experiences with MongoDB, Express.js, Angular, and Node.js</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#projects" class="px-8 py-3 rounded-full font-medium text-white" style="background-color: var(--primary-color);">View Projects</a>
+        <a href="#contact" class="px-8 py-3 rounded-full font-medium border" style="border-color: var(--primary-color); color: var(--text-color);">Contact Me</a>
+      </div>
+      <div class="mt-16">
+        <i class="fas fa-chevron-down animate-bounce text-2xl" style="color: var(--primary-color);"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 section">
+    <div class="container mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2">About Me</h2>
+        <div class="h-1 w-20 mx-auto rounded-full" style="background-color: var(--primary-color);"></div>
+      </div>
+      <div class="flex flex-col md:flex-row gap-12 items-center">
+        <div class="w-full md:w-1/2 text-center md:text-left">
+          <h3 class="text-2xl font-bold mb-4">I'm a Full Stack Developer with expertise in MEAN Stack</h3>
+          <p class="mb-6 leading-relaxed">With a passion for creating dynamic and efficient web applications, I specialize in building full-stack solutions using MongoDB, Express.js, Angular, and Node.js. My goal is to develop scalable and maintainable applications that solve real-world problems.</p>
+          <p class="mb-6 leading-relaxed">I enjoy working on challenging projects that push the boundaries of what's possible on the web. When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, and mentoring junior developers.</p>
+          <div class="flex flex-wrap gap-2 mt-8">
+            <span class="px-4 py-2 rounded-full text-sm" style="background-color: var(--primary-color); color: white;">MongoDB</span>
+            <span class="px-4 py-2 rounded-full text-sm" style="background-color: var(--primary-color); color: white;">Express.js</span>
+            <span class="px-4 py-2 rounded-full text-sm" style="background-color: var(--primary-color); color: white;">Angular</span>
+            <span class="px-4 py-2 rounded-full text-sm" style="background-color: var(--primary-color); color: white;">Node.js</span>
+            <span class="px-4 py-2 rounded-full text-sm" style="background-color: var(--primary-color); color: white;">TypeScript</span>
+            <span class="px-4 py-2 rounded-full text-sm" style="background-color: var(--primary-color); color: white;">RESTful APIs</span>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2">
+          <div class="relative">
+            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full mx-auto overflow-hidden border-4" style="border-color: var(--primary-color);">
+              <div class="w-full h-full bg-gray-300 flex items-center justify-center">
+                <!-- <i class="fas fa-user-circle text-6xl text-gray-400"></i> -->
+                 <img src="jeff.png">
+              </div>
+            </div>
+            <div class="absolute -bottom-5 -right-5 md:bottom-0 md:right-20 bg-white dark:bg-gray-800 rounded-full p-4 shadow-lg">
+              <i class="fas fa-laptop-code text-2xl" style="color: var(--primary-color);"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="Education page" id="Education">
+    <h2 class="heading">Academic <span>Credentials</span></h2>
+    <div class="education-timeline">
+      <div class="timeline-card">
+        <div class="university-brand">
+          <img src="./ain-shams-logo.png" 
+               alt="Ain Shams University"
+               class="uni-logo">
+          <div class="graduation-ribbon">B.Sc 2023</div>
+        </div>
+        <div class="degree-details">
+          <h3>B.Sc in Biology</h3>
+          <div class="specialization">
+            <i class="uil uil-brain"></i>
+            <span>Zoology & Chemistry department</span>
+          </div>
+          <div class="gpa-badge">
+            <span>2.6/4.0 GPA</span>
+          </div>
+          <ul class="achievements-list">
+            <li>Good in GPA</li>
+            <li>Excellent in Graduation Project</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 px-6 section" style="background-color: var(--card-bg);">
+    <div class="container mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2">My Skills</h2>
+        <div class="h-1 w-20 mx-auto rounded-full" style="background-color: var(--primary-color);"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div>
+          <h3 class="text-xl font-bold mb-6">Frontend Technologies</h3>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>Angular</span>
+              <span>95%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="95%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>TypeScript</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="90%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>JavaScript</span>
+              <span>92%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="92%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>HTML/CSS</span>
+              <span>88%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="88%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>RxJS</span>
+              <span>85%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="85%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-6">Backend Technologies</h3>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>Node.js</span>
+              <span>94%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="94%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>Express.js</span>
+              <span>92%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="92%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>MongoDB</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="90%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>RESTful APIs</span>
+              <span>95%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="95%"></div>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between mb-1">
+              <span>Docker</span>
+              <span>80%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-width="80%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 px-6 section">
+    <div class="container mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2">Featured Projects</h2>
+        <div class="h-1 w-20 mx-auto rounded-full" style="background-color: var(--primary-color);"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="project-card rounded-lg p-6">
+          <div class="p-4 rounded-full inline-block mb-4" style="background-color: var(--primary-color);">
+            <i class="fas fa-shopping-cart text-white text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">E-Commerce Platform</h3>
+          <p class="mb-4">A full-featured e-commerce platform built with MEAN stack. Features include user authentication, product management, cart functionality, and payment integration.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Angular</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Node.js</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">MongoDB</span>
+          </div>
+          <a href="#" class="inline-block" style="color: var(--primary-color);"><i class="fas fa-external-link-alt mr-1"></i> View Project</a>
+        </div>
+        
+        <!-- Project 2 -->
+        <div class="project-card rounded-lg p-6">
+          <div class="p-4 rounded-full inline-block mb-4" style="background-color: var(--primary-color);">
+            <i class="fas fa-tasks text-white text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Task Management App</h3>
+          <p class="mb-4">A collaborative task management application with real-time updates, team management, and progress tracking features for enhanced productivity.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Express.js</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Angular</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Socket.io</span>
+          </div>
+          <a href="#" class="inline-block" style="color: var(--primary-color);"><i class="fas fa-external-link-alt mr-1"></i> View Project</a>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="project-card rounded-lg p-6">
+          <div class="p-4 rounded-full inline-block mb-4" style="background-color: var(--primary-color);">
+            <i class="fas fa-chart-bar text-white text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Analytics Dashboard</h3>
+          <p class="mb-4">A comprehensive analytics dashboard for businesses with customizable widgets, data visualization, and real-time metrics tracking.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">MEAN Stack</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">D3.js</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">WebSockets</span>
+          </div>
+          <a href="#" class="inline-block" style="color: var(--primary-color);"><i class="fas fa-external-link-alt mr-1"></i> View Project</a>
+        </div>
+        
+        <!-- Project 4 -->
+        <div class="project-card rounded-lg p-6">
+          <div class="p-4 rounded-full inline-block mb-4" style="background-color: var(--primary-color);">
+            <i class="fas fa-comments text-white text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Real-time Chat Application</h3>
+          <p class="mb-4">A feature-rich chat application with private messaging, group chats, file sharing, and end-to-end encryption for secure communication.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Node.js</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Socket.io</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Angular</span>
+          </div>
+          <a href="#" class="inline-block" style="color: var(--primary-color);"><i class="fas fa-external-link-alt mr-1"></i> View Project</a>
+        </div>
+        
+        <!-- Project 5 -->
+        <div class="project-card rounded-lg p-6">
+          <div class="p-4 rounded-full inline-block mb-4" style="background-color: var(--primary-color);">
+            <i class="fas fa-calendar-alt text-white text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Appointment Booking System</h3>
+          <p class="mb-4">A comprehensive scheduling system for service-based businesses with automated reminders, availability management, and payment processing.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Express.js</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">MongoDB</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">Angular</span>
+          </div>
+          <a href="#" class="inline-block" style="color: var(--primary-color);"><i class="fas fa-external-link-alt mr-1"></i> View Project</a>
+        </div>
+        
+        <!-- Project 6 -->
+        <div class="project-card rounded-lg p-6">
+          <div class="p-4 rounded-full inline-block mb-4" style="background-color: var(--primary-color);">
+            <i class="fas fa-graduation-cap text-white text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Learning Management System</h3>
+          <p class="mb-4">An educational platform with course management, student progress tracking, content delivery, and assessment capabilities.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">MEAN Stack</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">AWS S3</span>
+            <span class="px-3 py-1 rounded-full text-xs" style="background-color: var(--primary-color); color: white;">JWT</span>
+          </div>
+          <a href="#" class="inline-block" style="color: var(--primary-color);"><i class="fas fa-external-link-alt mr-1"></i> View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feedback Section -->
+  <section class="feedback section" id="Feedback">
+    <div class="feedback-container">
+      <div class="feedback-header">
+        <h2 class="feedback-title">Customer Feedback</h2>
+        <div class="navigation-wrapper">
+          <div class="nav-arrow swiper-button-prev">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div class="nav-arrow swiper-button-next">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-container mySwiper">
+        <div class="swiper-wrapper">
+          <!-- Feedback Card 1 -->
+          <div class="swiper-slide">
+            <div class="feedback-card">
+              <div class="customer-img">
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Michael Chen">
+              </div>
+              <h3>Michael Chen</h3>
+              <h5>CTO TechStart</h5>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>             
+              </div>
+              <p>"The backend architecture Moaaz designed scaled perfectly with our growing user base. Exceptional work!"</p>
+            </div>
+          </div>
+          <!-- Feedback Card 2 -->
+          <div class="swiper-slide">
+            <div class="feedback-card">
+              <div class="customer-img">
+                <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Sarah Johnson">
+              </div>
+              <h3>Sarah Johnson</h3>
+              <h5>Product Manager</h5>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>              </div>
+              <p>"Quick turnaround time and excellent communication. Our API performance improved by 200%!"</p>
+            </div>
+          </div>
+          <!-- Feedback Card 3 -->
+          <div class="swiper-slide">
+            <div class="feedback-card">
+              <div class="customer-img">
+                <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="David Wilson">
+              </div>
+              <h3>David Wilson</h3>
+              <h5>Startup Founder</h5>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>              </div>
+              <p>"Moaaz's database optimization skills saved us thousands in server costs. Highly recommended!"</p>
+            </div>
+          </div>
+          <!-- Feedback Card 4 -->
+          <div class="swiper-slide">
+            <div class="feedback-card">
+              <div class="customer-img">
+                <img src="https://randomuser.me/api/portraits/women/4.jpg" alt="Emma Davis">
+              </div>
+              <h3>Emma Davis</h3>
+              <h5>E-commerce Director</h5>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>              </div>
+              <p>"Implemented a secure payment gateway that's been flawless. Great attention to security details."</p>
+            </div>
+          </div>
+          <!-- Feedback Card 5 -->
+          <div class="swiper-slide">
+            <div class="feedback-card">
+              <div class="customer-img">
+                <img src="https://randomuser.me/api/portraits/men/5.jpg" alt="James Miller">
+              </div>
+              <h3>James Miller</h3>
+              <h5>Lead Developer</h5>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>              </div>
+              <p>"Clean, maintainable code that integrated seamlessly with our existing systems. Top-notch professional."</p>
+            </div>
+          </div>
+          <!-- Feedback Card 6 -->
+          <div class="swiper-slide">
+            <div class="feedback-card">
+              <div class="customer-img">
+                <img src="https://randomuser.me/api/portraits/women/6.jpg" alt="Sophia Brown">
+              </div>
+              <h3>Sophia Brown</h3>
+              <h5>CTO HealthTech</h5>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>              </div>
+              <p>"HIPAA-compliant backend solution delivered ahead of schedule. Exceeded all our compliance requirements."</p>
+            </div>
+          </div>
+          <!-- Feedback Card 7 -->
+          <div class="swiper-slide">
+            <div class="feedback-card">
+              <div class="customer-img">
+                <img src="https://randomuser.me/api/portraits/men/7.jpg" alt="Daniel Taylor">
+              </div>
+              <h3>Daniel Taylor</h3>
+              <h5>DevOps Lead</h5>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>              </div>
+              <p>"The cloud migration strategy was flawless. Zero downtime during transition. Impressive work!"</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="py-20 px-6 section" style="background-color: var(--card-bg);">
+    <div class="container mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2">Work Experience</h2>
+        <div class="h-1 w-20 mx-auto rounded-full" style="background-color: var(--primary-color);"></div>
+      </div>
+      <div class="max-w-3xl mx-auto">
+        <!-- Experience 1 -->
+        <div class="timeline-item">
+          <div class="mb-2">
+            <span class="text-sm py-1 px-3 rounded-full" style="background-color: var(--primary-color); color: white;">2021 - Present</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Senior MEAN Stack Developer</h3>
+          <p class="text-lg mb-1" style="color: var(--primary-color);">Tech Innovations Inc.</p>
+          <p class="mb-4">Leading the development of enterprise applications using the MEAN stack. Designed and implemented scalable solutions for high-traffic web applications. Mentored junior developers and conducted code reviews.</p>
+          <ul class="list-disc pl-5 mb-4">
+            <li>Reduced application load time by 40% through optimization techniques</li>
+            <li>Implemented CI/CD pipelines for streamlined deployment</li>
+            <li>Designed RESTful APIs consumed by multiple client applications</li>
+          </ul>
+        </div>
+        
+        <!-- Experience 2 -->
+        <div class="timeline-item">
+          <div class="mb-2">
+            <span class="text-sm py-1 px-3 rounded-full" style="background-color: var(--primary-color); color: white;">2019 - 2021</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Full Stack Developer</h3>
+          <p class="text-lg mb-1" style="color: var(--primary-color);">WebSolutions Co.</p>
+          <p class="mb-4">Developed and maintained web applications using Angular, Node.js, Express, and MongoDB. Collaborated with UX/UI designers to implement responsive interfaces. Worked in an Agile development environment.</p>
+          <ul class="list-disc pl-5 mb-4">
+            <li>Built real-time features using Socket.io for collaborative applications</li>
+            <li>Integrated third-party APIs for payment processing and social login</li>
+            <li>Implemented automated testing using Jasmine and Karma</li>
+          </ul>
+        </div>
+        
+        <!-- Experience 3 -->
+        <div class="timeline-item">
+          <div class="mb-2">
+            <span class="text-sm py-1 px-3 rounded-full" style="background-color: var(--primary-color); color: white;">2017 - 2019</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Junior Web Developer</h3>
+          <p class="text-lg mb-1" style="color: var(--primary-color);">Digital Crafters</p>
+          <p class="mb-4">Started as a frontend developer working with HTML, CSS, and JavaScript. Gradually transitioned to full-stack development with MongoDB, Express, Angular, and Node.js.</p>
+          <ul class="list-disc pl-5 mb-4">
+            <li>Contributed to the development of responsive web designs</li>
+            <li>Learned database design and implementation with MongoDB</li>
+            <li>Developed RESTful APIs using Express.js</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6 section">
+    <div class="container mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2">Get In Touch</h2>
+        <div class="h-1 w-20 mx-auto rounded-full" style="background-color: var(--primary-color);"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div>
+          <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+          <div class="flex items-start mb-6">
+            <div class="p-3 rounded-full mr-4" style="background-color: var(--primary-color);">
+              <i class="fas fa-envelope text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Email</h4>
+              <p>moaaz20550@gmail.com</p>
+            </div>
+          </div>
+          <div class="flex items-start mb-6">
+            <div class="p-3 rounded-full mr-4" style="background-color: var(--primary-color);">
+              <i class="fas fa-phone text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Phone</h4>
+              <p>+20 01057152033</p>
+            </div>
+          </div>
+          <div class="flex items-start mb-6">
+            <div class="p-3 rounded-full mr-4" style="background-color: var(--primary-color);">
+              <i class="fas fa-map-marker-alt text-white"></i>
+            </div>
+            <div>
+              <h4 class="font-bold mb-1">Location</h4>
+              <p>Cairo , Egypt</p>
+            </div>
+          </div>
+          <div class="mt-8">
+            <h4 class="font-bold mb-4">Connect With Me</h4>
+            <div class="flex space-x-4">
+              <a href="#" class="p-3 rounded-full" style="background-color: var(--primary-color);">
+                <i class="fab fa-github text-white"></i>
+              </a>
+              <a href="#" class="p-3 rounded-full" style="background-color: var(--primary-color);">
+                <i class="fab fa-linkedin-in text-white"></i>
+              </a>
+              <a href="#" class="p-3 rounded-full" style="background-color: var(--primary-color);">
+                <i class="fab fa-twitter text-white"></i>
+              </a>
+              <a href="#" class="p-3 rounded-full" style="background-color: var(--primary-color);">
+                <i class="fab fa-stack-overflow text-white"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-6">Send Me a Message</h3>
+          <form id="contact-form" class="space-y-4">
+            <div>
+              <label for="name" class="block mb-1 font-medium">Name</label>
+              <input type="text" id="name" class="form-input w-full p-3 rounded-lg text-base" placeholder="Your Name">
+            </div>
+            <div>
+              <label for="email" class="block mb-1 font-medium">Email</label>
+              <input type="email" id="email" class="form-input w-full p-3 rounded-lg text-base" placeholder="Your Email">
+            </div>
+            <div>
+              <label for="subject" class="block mb-1 font-medium">Subject</label>
+              <input type="text" id="subject" class="form-input w-full p-3 rounded-lg text-base" placeholder="Subject">
+            </div>
+            <div>
+              <label for="message" class="block mb-1 font-medium">Message</label>
+              <textarea id="message" rows="4" class="form-input w-full p-3 rounded-lg text-base" placeholder="Your Message"></textarea>
+            </div>
+            <button type="submit" class="px-6 py-3 rounded-lg font-medium text-white w-full" style="background-color: var(--primary-color);">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 px-6 text-center" style="background-color: var(--card-bg);">
+    <div class="container mx-auto">
+      <div class="text-2xl font-bold mb-4" style="color: var(--primary-color);">Dev<span class="text-gray-700 dark:text-gray-300">Portfolio</span></div>
+      <p class="mb-6">MEAN Stack Developer showcasing MongoDB, Express.js, Angular, and Node.js projects</p>
+      <div class="flex justify-center space-x-4 mb-6">
+        <a href="#" class="p-2 rounded-full hover:opacity-80" style="background-color: var(--primary-color);">
+          <i class="fab fa-github text-white"></i>
+        </a>
+        <a href="#" class="p-2 rounded-full hover:opacity-80" style="background-color: var(--primary-color);">
+          <i class="fab fa-linkedin-in text-white"></i>
+        </a>
+        <a href="#" class="p-2 rounded-full hover:opacity-80" style="background-color: var(--primary-color);">
+          <i class="fab fa-twitter text-white"></i>
+        </a>
+        <a href="#" class="p-2 rounded-full hover:opacity-80" style="background-color: var(--primary-color);">
+          <i class="fab fa-stack-overflow text-white"></i>
+        </a>
+      </div>
+      <div class="text-sm opacity-75">© 2023 MEAN Developer Portfolio. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Initialize light/dark mode based on user preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.remove('light');
+      document.body.classList.add('dark');
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      if (event.matches) {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+      }
+    });
+
+    // Wait for the document to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // GSAP Animations
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Animate sections on scroll
+      gsap.utils.toArray('.section').forEach(section => {
+        gsap.fromTo(section, 
+          { opacity: 0, y: 50 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1, 
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+
+      // Animate skill bars
+      const skillBars = document.querySelectorAll('.skill-progress');
+      skillBars.forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        gsap.to(bar, {
+          width: width,
+          duration: 1.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: bar,
+            start: 'top 90%',
+            toggleActions: 'play none none none'
+          }
+        });
+      });
+
+      // Create animated particles for background
+      const particlesContainer = document.getElementById('particles-container');
+      for (let i = 0; i < 80; i++) {
+        createParticle();
+      }
+
+      function createParticle() {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 4 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        particle.style.left = `${x}%`;
+        particle.style.top = `${y}%`;
+        particlesContainer.appendChild(particle);
+        gsap.to(particle, {
+          x: `${(Math.random() - 0.5) * 100}px`,
+          y: `${(Math.random() - 0.5) * 100}px`,
+          opacity: Math.random() * 0.4 + 0.1,
+          duration: Math.random() * 20 + 10,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
+
+      // Theme toggle functionality
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('light')) {
+          document.body.classList.remove('light');
+          document.body.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+          document.body.classList.add('light');
+        }
+      });
+
+      // Color picker functionality
+      const colorMenuBtn = document.getElementById('colorMenuBtn');
+      const colorMenu = document.getElementById('colorMenu');
+      const colorOptions = document.querySelectorAll('.color-option');
+
+      colorMenuBtn.addEventListener('click', () => {
+        colorMenu.classList.toggle('hidden');
+      });
+
+      colorOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          const color = option.getAttribute('data-color');
+          document.documentElement.style.setProperty('--primary-color', color);
+          const darkColor = LightenDarkenColor(color, -30);
+          const lightColor = LightenDarkenColor(color, 30);
+          document.documentElement.style.setProperty('--primary-dark', darkColor);
+          document.documentElement.style.setProperty('--primary-light', lightColor);
+          colorMenu.classList.add('hidden');
+        });
+      });
+
+      function LightenDarkenColor(hex, amount) {
+        let r = parseInt(hex.substr(1, 2), 16);
+        let g = parseInt(hex.substr(3, 2), 16);
+        let b = parseInt(hex.substr(5, 2), 16);
+        r = Math.max(0, Math.min(255, r + amount));
+        g = Math.max(0, Math.min(255, g + amount));
+        b = Math.max(0, Math.min(255, b + amount));
+        return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+      }
+
+      // Mobile menu functionality
+      const hamburger = document.querySelector('.hamburger');
+      const navMenu = document.querySelector('.nav-menu');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('hidden');
+        navMenu.classList.toggle('active');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+          navMenu.classList.add('hidden');
+          navMenu.classList.remove('active');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.add('hidden');
+          navMenu.classList.remove('active');
+          navLinks.forEach(el => el.classList.remove('active'));
+          link.classList.add('active');
+        });
+      });
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.pageYOffset >= (sectionTop - sectionHeight / 3)) {
+            current = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // Form submission
+      const contactForm = document.getElementById('contact-form');
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        console.log('Form submitted:', { name, email, subject, message });
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+      });
+
+      // Initialize Swiper for Feedback Section
+      const swiper = new Swiper('.mySwiper', {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          320: { slidesPerView: 1, spaceBetween: 20 },
+          640: { slidesPerView: 2, spaceBetween: 20 },
+          1024: { slidesPerView: 3, spaceBetween: 30 }
+        },
+        loop: true,
+        mousewheel: {
+          forceToAxis: true,
+        }
+      });
+
+      // Favorite functionality for feedback cards
+      document.querySelectorAll('.favorite-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          this.classList.toggle('active');
+          const icon = this.querySelector('i');
+          icon.classList.toggle('far');
+          icon.classList.toggle('fas');
+        });
+      });
+
+      // Feedback menu functionality
+      document.querySelectorAll('.menu-trigger').forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const menu = this.closest('.feedback-card').querySelector('.feedback-menu');
+          menu.classList.toggle('active');
+        });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        document.querySelectorAll('.feedback-menu').forEach(menu => {
+          if (!menu.contains(e.target) && !e.target.closest('.menu-trigger')) {
+            menu.classList.remove('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
